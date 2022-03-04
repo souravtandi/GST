@@ -12,29 +12,37 @@ const NavBar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">GST Tool</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <a className="navbar-brand text-white" href="#">GST Tool</a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/">Home</NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/filing">Filing</NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/sales">Sales</NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/purchase">Purchase</NavLink>
+                    </li>
+                </ul>
+                    <form className="navbar-nav nav-item d-flex">
+                        <NavLink className="nav-link" to="/manageuser">Manage</NavLink>
+                        <NavLink className="nav-link" to="/adduser">AddUser</NavLink>
                         <NavLink className="nav-link" to="/login">Login</NavLink>
-                        
-                    </div>
-                </div>
-                <div className="navbar-nav d-md-flex justify-content-md-end">
-                    <NavLink className="nav-link" to="/manageuser">Manage</NavLink>
-                    <NavLink className="nav-link" to="/adduser">Add User</NavLink>
-                    <button onClick={()=>{logout()}} type="button" className="btn btn-danger">Logout</button>
+                        <a onClick={()=>{logout()}} type="button" className="btn btn-danger">Logout</a>
+                   </form>
                 </div>
             </div>
         </nav>
+        
     );
 }
 
