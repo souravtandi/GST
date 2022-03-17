@@ -1,3 +1,9 @@
-.container{
-    background-color: aliceblue;
+.login-container{
+    width: 30vw;
+}
+
+@media (max-width: 768px){
+    .login-container{
+        width: 98vw;
+    }
 }

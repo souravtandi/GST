@@ -1,14 +1,44 @@
-import React from "react";
+import React, {useContext} from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 const NavBar = () => {
-
+    //if user has session than state will not be null else it will be null
+    const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const logout = ()=>{
-        navigate("/login");
+        localStorage.clear();
+        dispatch({ type: 'LOGOUT' });
+        navigate('/login');
+    }
 
-
+    const navigationMenu = () => {
+        if (state) {//user is logged in
+            return [
+                <li key="101" className="nav-item">
+                <NavLink className="nav-link" to="/filing">Filing</NavLink>
+                </li>,
+                <li key="102" className="nav-item">
+                    <NavLink className="nav-link" to="/sales">Sales</NavLink>
+                </li>,
+                <li key="103" className="nav-item">
+                    <NavLink className="nav-link" to="/purchase">Purchase</NavLink>
+                </li>,
+                <li key="106" className="nav-item">
+                <NavLink className="nav-link" to="/manage/view">Manage</NavLink>
+                </li>,
+                <li key="104" className="nav-item">
+                <a onClick={()=>{logout()}} type="button" className="btn btn-danger">Logout</a>
+                </li>
+            ]
+        }else{
+            return [
+                <li key="105" className="nav-item">
+                     <NavLink className="nav-link" to="/login">Login</NavLink>
+                </li>
+             ]
+        }
     }
 
     return (
@@ -23,22 +53,10 @@ const NavBar = () => {
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/">Home</NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/filing">Filing</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/sales">Sales</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/purchase">Purchase</NavLink>
-                    </li>
+                    {navigationMenu()}
+
                 </ul>
-                    <form className="navbar-nav nav-item d-flex">
-                        <NavLink className="nav-link" to="/manageuser">Manage</NavLink>
-                        <NavLink className="nav-link" to="/adduser">AddUser</NavLink>
-                        <NavLink className="nav-link" to="/login">Login</NavLink>
-                        <a onClick={()=>{logout()}} type="button" className="btn btn-danger">Logout</a>
-                   </form>
+                    
                 </div>
             </div>
         </nav>
